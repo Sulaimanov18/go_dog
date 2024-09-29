@@ -30,6 +30,8 @@ exec('go test -v', (err, stdout, stderr) => {
 
     console.log(`Test Results:\n${stdout}`);
 
+
+
     // Step 2: Generate HTML report
     const options = {
         theme: 'bootstrap',
