@@ -1,4 +1,8 @@
-exec('godog -f cucumber:test/report/cucumber_report.json ./features', (err, stdout, stderr) => {
+const { exec } = require('child_process');
+const reporter = require('cucumber-html-reporter');
+const axios = require('axios');
+
+exec('go test -v', (err, stdout, stderr) => {
     if (err) {
         console.error(`Error executing tests: ${stderr}`);
         return;
@@ -8,7 +12,7 @@ exec('godog -f cucumber:test/report/cucumber_report.json ./features', (err, stdo
 
     const options = {
         theme: 'bootstrap',
-        jsonFile: 'test/report/cucumber_report.json', // Ensure this matches the JSON output path from godog
+        jsonFile: 'test/report/cucumber_report.json', // Ensure this matches your output path
         output: 'test/report/cucumber_report.html', // Path where the HTML report will be saved
         reportSuiteAsScenarios: true,
         launchReport: true,
