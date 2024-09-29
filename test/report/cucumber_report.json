@@ -1,0 +1,164 @@
+[
+    {
+        "uri": "features/godogs.feature",
+        "id": "eat-godogs",
+        "keyword": "Feature",
+        "name": "eat godogs",
+        "description": "  In order to be happy\n  As a hungry gopher\n  I need to be able to eat godogs",
+        "line": 1,
+        "elements": [
+            {
+                "id": "eat-godogs;eat-5-out-of-12",
+                "keyword": "Scenario",
+                "name": "Eat 5 out of 12",
+                "description": "",
+                "line": 6,
+                "type": "scenario",
+                "steps": [
+                    {
+                        "keyword": "Given ",
+                        "name": "there are 12 godogs",
+                        "line": 7,
+                        "match": {
+                            "location": "godogs_test.go:15"
+                        },
+                        "result": {
+                            "status": "passed",
+                            "duration": 153625
+                        }
+                    },
+                    {
+                        "keyword": "When ",
+                        "name": "I eat 5",
+                        "line": 8,
+                        "match": {
+                            "location": "godogs_test.go:19"
+                        },
+                        "result": {
+                            "status": "passed",
+                            "duration": 12958
+                        }
+                    },
+                    {
+                        "keyword": "Then ",
+                        "name": "there should be 7 remaining",
+                        "line": 9,
+                        "match": {
+                            "location": "godogs_test.go:34"
+                        },
+                        "result": {
+                            "status": "passed",
+                            "duration": 10917
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "uri": "features/version.feature",
+        "id": "get-version",
+        "keyword": "Feature",
+        "name": "get version",
+        "description": "  In order to know godog version\n  As an API user\n  I need to be able to request version",
+        "line": 1,
+        "elements": [
+            {
+                "id": "get-version;does-not-allow-post-method",
+                "keyword": "Scenario",
+                "name": "does not allow POST method",
+                "description": "",
+                "line": 6,
+                "type": "scenario",
+                "steps": [
+                    {
+                        "keyword": "When ",
+                        "name": "I send \"POST\" request to \"/version\"",
+                        "line": 7,
+                        "match": {
+                            "location": "features/version.feature:7"
+                        },
+                        "result": {
+                            "status": "undefined"
+                        }
+                    },
+                    {
+                        "keyword": "Then ",
+                        "name": "the response code should be 405",
+                        "line": 8,
+                        "match": {
+                            "location": "features/version.feature:8"
+                        },
+                        "result": {
+                            "status": "undefined"
+                        }
+                    },
+                    {
+                        "keyword": "And ",
+                        "name": "the response should match json:",
+                        "line": 9,
+                        "doc_string": {
+                            "value": "{\n  \"error\": \"Method not allowed\"\n}",
+                            "content_type": "",
+                            "line": 10
+                        },
+                        "match": {
+                            "location": "features/version.feature:9"
+                        },
+                        "result": {
+                            "status": "undefined"
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "get-version;should-get-version-number",
+                "keyword": "Scenario",
+                "name": "should get version number",
+                "description": "",
+                "line": 16,
+                "type": "scenario",
+                "steps": [
+                    {
+                        "keyword": "When ",
+                        "name": "I send \"GET\" request to \"/version\"",
+                        "line": 17,
+                        "match": {
+                            "location": "features/version.feature:17"
+                        },
+                        "result": {
+                            "status": "undefined"
+                        }
+                    },
+                    {
+                        "keyword": "Then ",
+                        "name": "the response code should be 200",
+                        "line": 18,
+                        "match": {
+                            "location": "features/version.feature:18"
+                        },
+                        "result": {
+                            "status": "undefined"
+                        }
+                    },
+                    {
+                        "keyword": "And ",
+                        "name": "the response should match json:",
+                        "line": 19,
+                        "doc_string": {
+                            "value": "{\n  \"version\": \"v0.0.0-dev\"\n}",
+                            "content_type": "",
+                            "line": 20
+                        },
+                        "match": {
+                            "location": "features/version.feature:19"
+                        },
+                        "result": {
+                            "status": "undefined"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]
