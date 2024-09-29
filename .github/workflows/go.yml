@@ -26,19 +26,19 @@ jobs:
 
       - name: Run godog tests
         run: |
-          godog -format=pretty ./features
-
+          godog -f cucumber:test/report/cucumber_report.json ./features  # Generate Cucumber report
 
       - name: Upload Test Report
-        uses: actions/upload-artifact@v3  # Updated version
+        uses: actions/upload-artifact@v3
         with:
-          name: godog-test-report
-          path: test/report/cucumber_report.html  # Adjust the path based on where your report is saved
+          name: cucumber-report
+          path: test/report/cucumber_report.json  # Adjust this path if needed
 
       - name: Send report to Slack
         env:
           SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}  # Your Slack Bot User OAuth Token
         run: |
+          REPORT_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts"  # Link to the artifacts
           curl -X POST -H 'Content-type: application/json' \
-          --data '{"text": "Godog test report available: <.html>"}' \
+          --data '{"text": "Godog test report available: '"${REPORT_URL}"'"}' \
           https://slack.com/api/chat.postMessage
