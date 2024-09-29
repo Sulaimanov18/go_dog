@@ -13,11 +13,11 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
-        
+
       - name: Set up Go
         uses: actions/setup-go@v2
         with:
-          go-version: '1.21.6'  
+          go-version: '1.21.6'
 
       - name: Install dependencies
         run: go mod tidy
@@ -28,7 +28,7 @@ jobs:
           # Optionally use a different format like -format=html to generate an HTML report if you set up a reporter.
 
       - name: Upload Test Report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3  # Updated version
         with:
           name: godog-test-report
           path: test/report/cucumber_report.html  # Adjust the path based on where your report is saved
