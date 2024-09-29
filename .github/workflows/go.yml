@@ -22,7 +22,7 @@ jobs:
       - name: Install godog and HTML report generator
         run: |
           go install github.com/cucumber/godog/cmd/godog@latest
-          go install github.com/sulaimanov18/go_dog  # Replace with the actual HTML report generator
+          go install github.com/sulaimanov18/go_dog@latest  # Install your HTML report generator
           export PATH=$PATH:$(go env GOPATH)/bin
 
       - name: Run godog tests
@@ -39,6 +39,12 @@ jobs:
           name: cucumber-report
           path: test/report/cucumber_report.json  # Adjust this path if needed
 
+      - name: Upload HTML Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: html-report
+          path: test/report/cucumber_report.html  # Path to your generated HTML report
+
       - name: Send report to Slack
         env:
           SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}  # Your Slack Bot User OAuth Token
@@ -47,5 +53,3 @@ jobs:
           curl -X POST -H 'Content-type: application/json' \
           --data '{"text": "Godog test report available: '"${REPORT_URL}"'"}' \
           https://slack.com/api/chat.postMessage
-
-          
