@@ -19,14 +19,19 @@ jobs:
         with:
           go-version: '1.21.13'
 
-      - name: Install godog
+      - name: Install godog and HTML report generator
         run: |
           go install github.com/cucumber/godog/cmd/godog@latest
+          go install github.com/your-username/go-cucumber-html@latest  # Replace with the actual HTML report generator
           export PATH=$PATH:$(go env GOPATH)/bin
 
       - name: Run godog tests
         run: |
           godog -f cucumber:test/report/cucumber_report.json ./features  # Generate Cucumber report
+
+      - name: Generate HTML Report from JSON
+        run: |
+          go-cucumber-html test/report/cucumber_report.json test/report/cucumber_report.html  # Adjust this as needed
 
       - name: Upload Test Report
         uses: actions/upload-artifact@v3
