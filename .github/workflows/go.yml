@@ -22,7 +22,7 @@ jobs:
       - name: Install godog and HTML report generator
         run: |
           go install github.com/cucumber/godog/cmd/godog@latest
-          go install github.com/sulaimanov18/go-cucumber-html@latest  # Replace with the actual HTML report generator
+          go install github.com/sulaimanov18/go_dog  # Replace with the actual HTML report generator
           export PATH=$PATH:$(go env GOPATH)/bin
 
       - name: Run godog tests
@@ -47,3 +47,5 @@ jobs:
           curl -X POST -H 'Content-type: application/json' \
           --data '{"text": "Godog test report available: '"${REPORT_URL}"'"}' \
           https://slack.com/api/chat.postMessage
+
+          
