@@ -1,0 +1,42 @@
+name: CI
+
+on:
+  schedule:
+    - cron: '0 0 * * 1,4'  # Run at midnight every Monday and Thursday
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+        
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: '1.20'  # Adjust to your Go version
+
+      - name: Install dependencies
+        run: go mod tidy
+
+      - name: Run Godog Tests
+        run: |
+          godog -format=pretty ./features  # Run your tests
+          # Optionally use a different format like -format=html to generate an HTML report if you set up a reporter.
+
+      - name: Upload Test Report
+        uses: actions/upload-artifact@v2
+        with:
+          name: godog-test-report
+          path: test/report/cucumber_report.html  # Adjust the path based on where your report is saved
+
+      - name: Send report to Slack
+        env:
+          SLACK_TOKEN: ${{ secrets.SLACK_TOKEN }}  # Your Slack Bot User OAuth Token
+        run: |
+          curl -X POST -H 'Content-type: application/json' \
+          --data '{"text": "Godog test report available: <.html>"}' \
+          https://slack.com/api/chat.postMessage
