@@ -22,7 +22,7 @@ jobs:
       - name: Install godog and HTML report generator
         run: |
           go install github.com/cucumber/godog/cmd/godog@latest
-          go install github.com/your-username/go-cucumber-html@latest  # Replace with the actual HTML report generator
+          go install github.com/sulaimanov18/go-cucumber-html@latest  # Replace with the actual HTML report generator
           export PATH=$PATH:$(go env GOPATH)/bin
 
       - name: Run godog tests
