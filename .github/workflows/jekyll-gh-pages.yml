@@ -37,7 +37,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: html-report
-          path: path/to/generated/report.html  # Adjust to the path of your generated report
+          path: test/report/cucumber_report.html # Adjust to the path of your generated report
 
   # Deployment job
   deploy:
@@ -55,7 +55,7 @@ jobs:
       - name: Move Report to Publish Directory
         run: |
           mkdir -p ./public
-          cp path/to/generated/report.html ./public/index.html  # Move the report to the public directory
+          cp test/report/cucumber_report.html  # Move the report to the public directory
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -63,3 +63,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+
